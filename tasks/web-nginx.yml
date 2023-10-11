@@ -42,4 +42,12 @@
     name: nginx
     state: started
 
+- name: Get nginx version
+  ansible.builtin.command: nginx -v
+  register: nginx_version
+
+- name: Show nginx version
+  debug:
+    var: nginx_version
+
 # SELinux should be handled by openmicroscopy.omero-web-runtime
