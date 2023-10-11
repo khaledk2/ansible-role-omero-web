@@ -4,7 +4,12 @@
 - name: Prepare
   hosts: all
 
+
   tasks:
+    - name: Upgrade
+      ansible.builtin.apt:
+        upgrade: dist
+
     - name: Install packages
       become: true
       ansible.builtin.apt:
