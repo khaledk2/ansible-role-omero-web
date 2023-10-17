@@ -5,6 +5,13 @@
 - name: omero web | flush systemd handlers
   meta: flush_handlers
 
+- name: omero web | enable nginx
+  become: true
+  service:
+    enabled: true
+    name: nginx
+    state: started
+
 - block:
 
     - name: omero web | generate nginx config
@@ -35,11 +42,6 @@
     replace: '80; # default_server;'
   notify: restart nginx
 
-- name: omero web | enable nginx
-  become: true
-  service:
-    enabled: true
-    name: nginx
-    state: restarted
+
 
 # SELinux should be handled by openmicroscopy.omero-web-runtime
