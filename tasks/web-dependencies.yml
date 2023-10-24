@@ -59,6 +59,8 @@
 
 - debug: msg="stderr={{ output.stderr }}"
 
+- debug: msg="stderr={{ output }}"
+
 
 - name: omero web | Load the policy module
   command: "semodule -i /tmp/django.pp"
