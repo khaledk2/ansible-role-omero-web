@@ -40,13 +40,13 @@
       - checkpolicy
       - policycoreutils
     state: present
-   when: ansible_os_family | lower == 'redhat'
+  when: ansible_os_family | lower == 'redhat'
 
 - name: Compile into a policy module
   command: "checkmodule -M -m -o /tmp/django.mod /tmp/django.te"
   args:
     creates: /tmp/django.mod
-   when: ansible_os_family | lower == 'redhat'
+  when: ansible_os_family | lower == 'redhat'
 
 - name: Package the policy module
   command: "semodule_package -o /tmp/django.pp -m /tmp/django.mod"
@@ -60,4 +60,4 @@
     - Reload SELinux
   args:
     creates: /tmp/django.pp
-   when: ansible_os_family | lower == 'redhat'
+  when: ansible_os_family | lower == 'redhat'
