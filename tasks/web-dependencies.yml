@@ -1,5 +1,10 @@
 ---
 # selinux
+- name : omero web  | check pp file
+  stat:
+    path:  /tmp/django.pp
+  register: pp_file_name
+
 
 - name: omero web | selinux booleans
   become: true
@@ -29,7 +34,7 @@
     dest: /tmp/django.te
     force: true
     src: django.te.j2
-    mode: 0777
+    mode: 0644
 
 
 - name: omero web | install checkpolicy
@@ -50,17 +55,9 @@
 
 - name: omero web | Package the policy module
   command: "semodule_package -o /tmp/django.pp -m /tmp/django.mod"
-  register: output
   args:
     creates: /tmp/mypolicy.pp
-  when: ansible_os_family | lower == 'redhat'
-
-- debug: msg="stdout={{ output.stdout }}"
-
-- debug: msg="stderr={{ output.stderr }}"
-
-- debug: msg="stderr={{ output }}"
-
+  when: (ansible_os_family | lower == 'redhat') and (not pp_file_name.exists)
 
 - name: omero web | Load the policy module
   command: "semodule -i /tmp/django.pp"
