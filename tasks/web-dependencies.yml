@@ -23,7 +23,7 @@
   when: selinux_enabled
 
 - name: Compile into a policy module
-  command: checkmodule -M -m -o /tmp/django.mod /tmp/django.te
+  command: checkmodule -M -m -o /tmp/django.mod django.te.je
   args:
     creates: /tmp/django.mod
 
