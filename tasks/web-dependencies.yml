@@ -57,7 +57,9 @@
   command: "semodule_package -o /tmp/django.pp -m /tmp/django.mod"
   args:
     creates: /tmp/mypolicy.pp
-  when: (ansible_os_family | lower == 'redhat') and (not pp_file_name.exists)
+  when:
+    - ansible_os_family | lower == 'redhat'
+    - pp_file_name.exists == false
 
 - name: omero web | Load the policy module
   command: "semodule -i /tmp/django.pp"
