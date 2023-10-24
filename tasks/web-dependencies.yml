@@ -36,7 +36,9 @@
   become: true
   ansible.builtin.dnf:
     update_cache: true
-    name: checkpolicy policycoreutils
+    name:
+      - checkpolicy
+      - policycoreutils
     state: present
 
 - name: Compile into a policy module
