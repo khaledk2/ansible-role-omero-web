@@ -42,6 +42,12 @@
     replace: '80; # default_server;'
   notify: restart nginx
 
-
-
 # SELinux should be handled by openmicroscopy.omero-web-runtime
+
+- name: omero web | enable nginx
+  become: true
+  service:
+    enabled: true
+    name: nginx
+    state: started
+  when: ansible_os_family | lower != 'redhat'
