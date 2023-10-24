@@ -29,7 +29,7 @@
     dest: /tmp/django.te
     force: true
     src: django.te.j2
-    mode: 0644
+    mode: 0777
 
 
 - name: omero web | install checkpolicy
@@ -44,8 +44,8 @@
 
 - name: omero web | Compile into a policy module
   command: "checkmodule -M -m -o /tmp/django.mod /tmp/django.te"
-  # args:
-  #  creates: /tmp/django.mod
+  #args:
+    creates: /tmp/django.mod
   when: ansible_os_family | lower == 'redhat'
 
 - name: omero web | Package the policy module
