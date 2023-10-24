@@ -22,8 +22,19 @@
     state: present
   when: selinux_enabled
 
+
+- name: omero web | copy te file
+  become: true
+  template:
+    dest: /tmp/django.te
+    force: true
+    src: django.te.j2
+    mode: 0644
+
+
+
 - name: Compile into a policy module
-  command: "checkmodule -M -m -o /tmp/django.mod django.te.je"
+  command: "checkmodule -M -m -o /tmp/django.mod /tmp/django.te"
   args:
     creates: /tmp/django.mod
 
