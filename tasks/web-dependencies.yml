@@ -44,8 +44,8 @@
 
 - name: omero web | Compile into a policy module
   command: "checkmodule -M -m -o /tmp/django.mod /tmp/django.te"
-  args:
-    creates: /tmp/django.mod
+  # args:
+  #  creates: /tmp/django.mod
   when: ansible_os_family | lower == 'redhat'
 
 - name: omero web | Package the policy module
@@ -58,9 +58,6 @@
 - debug: msg="stdout={{ output.stdout }}"
 
 - debug: msg="stderr={{ output.stderr }}"
-
- 
-
 
 
 - name: omero web | Load the policy module
