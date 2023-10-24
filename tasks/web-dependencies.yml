@@ -54,10 +54,10 @@
     creates: /tmp/mypolicy.pp
   when: ansible_os_family | lower == 'redhat'
 
-- name: Load the policy module
-  command: "semodule -i /tmp/django.pp"
-  notify:
-    - Reload SELinux
-  args:
-    creates: /tmp/django.pp
-  when: ansible_os_family | lower == 'redhat'
+# - name: Load the policy module
+#   command: "semodule -i /tmp/django.pp"
+#   notify:
+#     - Reload SELinux
+#   args:
+#     creates: /tmp/django.pp
+#   when: ansible_os_family | lower == 'redhat'
