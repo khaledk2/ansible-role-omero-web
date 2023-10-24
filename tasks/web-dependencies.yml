@@ -23,17 +23,17 @@
   when: selinux_enabled
 
 - name: Compile into a policy module
-  command: checkmodule -M -m -o /tmp/django.mod django.te.je
+  command: "checkmodule -M -m -o /tmp/django.mod django.te.je"
   args:
     creates: /tmp/django.mod
 
 - name: Package the policy module
-  command: semodule_package -o /tmp/django.pp -m /tmp/django.mod
+  command: "semodule_package -o /tmp/django.pp -m /tmp/django.mod"
   args:
     creates: /tmp/mypolicy.pp
 
 - name: Load the policy module
-  command: semodule -i /tmp/django.pp
+  command: "semodule -i /tmp/django.pp"
   notify:
     - Reload SELinux
   args:
