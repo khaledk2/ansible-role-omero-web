@@ -32,6 +32,12 @@
     mode: 0644
 
 
+- name: omero web | install checkpolicy
+  become: true
+  ansible.builtin.dnf:
+    update_cache: true
+    name: checkpolicy
+    state: present
 
 - name: Compile into a policy module
   command: "checkmodule -M -m -o /tmp/django.mod /tmp/django.te"
