@@ -61,19 +61,6 @@
      creates: /tmp/mypolicy.pp
   when: ansible_os_family | lower == 'redhat' and not pp_file_name.stat.exists
 
-
-- name: omero web | Load the policy module
-  become: true
-  register: output
-  command: "semodule -i /tmp/django.pp"
-  notify:
-    - omero-web Reload SELinux
-  when: ansible_os_family | lower == 'redhat'
-
-- name: omero web | Display output
-  ansible.builtin.debug:
-    msg: "{{ output }}"
-
 - name: omero web | list modules
   become: true
   register: output2
@@ -83,3 +70,21 @@
 - name: omero web | Display output
   ansible.builtin.debug:
     msg: "{{ output2 }}"
+
+
+- name: omero web | list modules
+  become: true
+  register: output2
+  command: "semodule -l"
+  when: ansible_os_family | lower == 'redhat'
+
+- name: omero web | Display output
+  ansible.builtin.debug:
+    msg: "{{ output2.stdout }}"
+
+- name: omero web | Load the policy module
+  become: true
+  command: "semodule -i /tmp/django.pp"
+  notify:
+    - omero-web Reload SELinux
+  when: ansible_os_family | lower == 'redhat' and "'django' not in output2.stdout"
