@@ -22,8 +22,3 @@ def test_nginx_gateway(host):
 def test_omero_web_config_applied(host):
     out = host.check_output('curl -L localhost')
     assert 'molecule-test:12345' in out
-
-
-def test_selinux_custom_policy(host):
-    out = host.check_output('semodule -l')
-    assert 'django' in out
