@@ -16,7 +16,7 @@
     state: restarted
   when: omero_web_systemd_setup and omero_web_systemd_start
 
-- name: Reload SELinux
+- name: omero-web Reload SELinux
   ansible.builtin.debug:
     msg:
       - "Hello from ....."
