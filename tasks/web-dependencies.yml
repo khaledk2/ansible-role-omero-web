@@ -46,7 +46,6 @@
     state: present
   when: ansible_os_family | lower == 'redhat'
 
-
 - name: omero web | Compile into a policy module
   become: true
   command: "checkmodule -M -m -o /tmp/django.mod /tmp/django.te"
@@ -65,6 +64,10 @@
 - name: omero web | Load the policy module
   become: true
   command: "semodule -i /tmp/django.pp"
-  notify:
-    - omero-web Reload SELinux
+  # notify:
+  #  - omero-web Reload SELinux
   when: ansible_os_family | lower == 'redhat'
+
+- name: omero-web Reload SELinux
+  become: true
+  command: load_policy
