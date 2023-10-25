@@ -64,17 +64,16 @@
   args:
      creates: /tmp/mypolicy.pp
 
-  when: ansible_os_family | lower == 'redhat' and not pp_file_name.stat.exists and mod_file_name.stat.exists
+  when: ansible_os_family | lower == 'redhat' and not pp_file_name.stat.exists
 
 - name: omero web | Load the policy module
   become: true
   command: "semodule -i /tmp/django.pp"
   notify:
     - omero-web Reload SELinux
-  when: ansible_os_family | lower == 'redhat' and mod_file_name.stat.exists
+  when: ansible_os_family | lower == 'redhat' and mod_file_name.stat.exists and pp_file_name.stat.exists
 
 - name: omero web | delete mod file
   ansible.builtin.file:
     path: /tmp/django.mod
     state: absent
-  when: mod_file_name.stat.exists
