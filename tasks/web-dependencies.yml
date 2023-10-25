@@ -61,16 +61,6 @@
      creates: /tmp/mypolicy.pp
   when: ansible_os_family | lower == 'redhat' and not pp_file_name.stat.exists
 
-- name: omero web | list modules
-  become: true
-  register: output2
-  command: "semodule -l"
-  when: ansible_os_family | lower == 'redhat'
-
-- name: omero web | Display output
-  ansible.builtin.debug:
-    msg: "{{ output2 }}"
-
 
 - name: omero web | list modules
   become: true
