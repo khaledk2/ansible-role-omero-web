@@ -42,16 +42,10 @@
     name:
       - checkpolicy
       - policycoreutils
+      - ipa-selinux
     state: present
   when: ansible_os_family | lower == 'redhat'
 
-- name: omero web | Reinstall of package by uninstall and new install.
-  become: true
-  ansible.builtin.dnf:
-    update_cache: true
-    name: selinux-policy-targeted
-    state: "{{ item }}"
-  with_items: ['absent', 'present']
 
 - name: omero web | Compile into a policy module
   become: true
