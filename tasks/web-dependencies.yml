@@ -77,3 +77,7 @@
   args:
     creates: /tmp/django.pp
   # when: ansible_os_family | lower == 'redhat'
+
+handlers:
+  - name: Reload SELinux
+    command: load_policy
