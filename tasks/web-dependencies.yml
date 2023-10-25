@@ -41,7 +41,7 @@
     name:
       - checkpolicy
       - policycoreutils
-      - ipa-selinux
+      # - ipa-selinux
       # - selinux-policy-targeted
     state: present
   when: ansible_os_family | lower == 'redhat'
