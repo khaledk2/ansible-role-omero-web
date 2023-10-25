@@ -24,6 +24,6 @@ def test_omero_web_config_applied(host):
     assert 'molecule-test:12345' in out
 
 
-def test_loading_selinux_custom_policy(host):
+def test_selinux_custom_policy(host):
     out = host.check_output('semodule -l')
     assert 'django' in out
