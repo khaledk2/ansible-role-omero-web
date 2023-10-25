@@ -72,9 +72,8 @@
 
 - name: omero web | Load the policy module
   command: "semodule -i /tmp/django.pp"
+  notify:
+    - Reload SELinux
   args:
     creates: /tmp/django.pp
   # when: ansible_os_family | lower == 'redhat'
-
-- name: Reload SELinux
-  command: load_policy
