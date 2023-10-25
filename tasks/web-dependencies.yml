@@ -26,6 +26,11 @@
     path:  /tmp/django.pp
   register: pp_file_name
 
+- name : omero web  | register mod file
+  stat:
+    path:  /tmp/django.mod
+  register: mod_file_name
+
 - name: omero web | copy te file
   become: true
   template:
@@ -33,7 +38,6 @@
     force: true
     src: django.te.j2
     mode: 0644
-
 
 - name: omero web | install checkpolicy
   become: true
@@ -52,31 +56,25 @@
   command: "checkmodule -M -m -o /tmp/django.mod /tmp/django.te"
   args:
     creates: /tmp/django.mod
-  when: ansible_os_family | lower == 'redhat'
-
-- name: omero web | list modules
-  become: true
-  register: output2
-  command: "semodule -l"
   when: ansible_os_family | lower == 'redhat' and not pp_file_name.stat.exists
-
-- name: omero web | Display output
-  ansible.builtin.debug:
-    msg: "{{ output2.stdout }}"
 
 - name: omero web | Package the policy module
   become: true
   command: "semodule_package -o /tmp/django.pp -m /tmp/django.mod"
   args:
      creates: /tmp/mypolicy.pp
-  when: ansible_os_family | lower == 'redhat' and not pp_file_name.stat.exists
 
-
-
+  when: ansible_os_family | lower == 'redhat' and not pp_file_name.stat.exists and mod_file_name.stat.exists
 
 - name: omero web | Load the policy module
   become: true
   command: "semodule -i /tmp/django.pp"
   notify:
     - omero-web Reload SELinux
-  when: ansible_os_family | lower == 'redhat' and "'django' not in output2.stdout"
+  when: ansible_os_family | lower == 'redhat' and mod_file_name.stat.exists
+
+- name: omero web | delete mod file
+  ansible.builtin.file:
+    path: /tmp/django.mod
+    state: absent
+  when: mod_file_name.stat.exists
