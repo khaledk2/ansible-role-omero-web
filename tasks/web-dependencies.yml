@@ -26,11 +26,6 @@
     path:  /tmp/django.pp
   register: pp_file_name
 
-- name : omero web  | register mod file
-  stat:
-    path:  /tmp/django.mod
-  register: mod_file_name
-
 - name: omero web | copy te file
   become: true
   template:
@@ -57,6 +52,11 @@
   args:
     creates: /tmp/django.mod
   when: ansible_os_family | lower == 'redhat' and not pp_file_name.stat.exists
+
+- name : omero web  | register mod file
+  stat:
+    path:  /tmp/django.mod
+  register: mod_file_name
 
 - name: omero web | Package the policy module
   become: true
