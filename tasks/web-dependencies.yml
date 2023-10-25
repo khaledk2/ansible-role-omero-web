@@ -68,6 +68,6 @@
   #  - omero-web Reload SELinux
   when: ansible_os_family | lower == 'redhat'
 
-- name: omero-web Reload SELinux
-  become: true
-  command: load_policy
+# - name: omero-web Reload SELinux
+#  become: true
+#  command: load_policy
