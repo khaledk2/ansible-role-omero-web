@@ -55,7 +55,7 @@
 - name: omero web | Package the policy module
   become: true
   command: "semodule_package -o /tmp/django.pp -m /tmp/django.mod"
-   args:
+  args:
      creates: /tmp/mypolicy.pp
   when: ansible_os_family | lower == 'redhat' and not pp_file_name.stat.exists
 
@@ -65,6 +65,4 @@
   command: "semodule -i /tmp/django.pp"
   notify:
     - omero-web Reload SELinux
-  # args:
-  #  creates: /tmp/django.pp
   when: ansible_os_family | lower == 'redhat'
