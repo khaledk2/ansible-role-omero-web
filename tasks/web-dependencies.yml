@@ -62,7 +62,7 @@
   command: "checkmodule -M -m -o /tmp/django.mod /tmp/django.te"
   args:
     creates: /tmp/django.mod
-  when: ansible_os_family | lower == 'redhat' and not pp_file_name.stat.exists
+  when: not pp_file_name.stat.exists
 
 - name : omero web  | register mod file
   stat:
