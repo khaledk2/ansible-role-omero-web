@@ -18,5 +18,6 @@
 
 - name: Reload SELinux
   ansible.builtin.debug:
-    msg:"HELLO  I am here"
-  # command: load_policy
+    msg:
+      - "Hello from ....."
+      - "the me ..."
