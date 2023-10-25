@@ -64,7 +64,12 @@
 
 - name: omero web | Load the policy module
   become: true
+  register: output
   command: "semodule -i /tmp/django.pp"
   notify:
     - omero-web Reload SELinux
   when: ansible_os_family | lower == 'redhat'
+
+- name: omero web | Display output
+  ansible.builtin.debug:
+    msg: output
