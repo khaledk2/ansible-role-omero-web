@@ -71,7 +71,7 @@
   command: "semodule -i /tmp/django.pp"
   notify:
     - omero-web Reload SELinux
-  when: ansible_os_family | lower == 'redhat' and mod_file_name.stat.exists and not pp_file_name.stat.exists
+  when: ansible_os_family | lower == 'redhat' and mod_file_name.stat.exists
 
 - name: omero web | delete mod file
   ansible.builtin.file:
