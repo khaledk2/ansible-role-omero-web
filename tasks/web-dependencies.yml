@@ -78,7 +78,7 @@
     creates: /tmp/django.pp
   # when: ansible_os_family | lower == 'redhat'
 
-- name: Restart everything
-    command: echo "this task will reload the plociy "
+- name: Restart selinux
+    command: "echo 'this task will reload the plociy' "
     notify:
       - omero-web Reload SELinux
