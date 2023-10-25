@@ -73,3 +73,13 @@
 - name: omero web | Display output
   ansible.builtin.debug:
     msg: output
+
+- name: omero web | list modules
+  become: true
+  register: output2
+  command: "semodule -l"
+  when: ansible_os_family | lower == 'redhat'
+
+- name: omero web | Display output
+  ansible.builtin.debug:
+    msg: output2
