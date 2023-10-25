@@ -17,4 +17,6 @@
   when: omero_web_systemd_setup and omero_web_systemd_start
 
 - name: Reload SELinux
-  command: load_policy
+  ansible.builtin.debug:
+    msg:"HELLO  I am here"
+  # command: load_policy
