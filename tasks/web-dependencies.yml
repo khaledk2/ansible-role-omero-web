@@ -72,7 +72,7 @@
 
 - name: omero web | Display output
   ansible.builtin.debug:
-    msg: output
+    msg: {{ output }}
 
 - name: omero web | list modules
   become: true
@@ -82,4 +82,4 @@
 
 - name: omero web | Display output
   ansible.builtin.debug:
-    msg: output2
+    msg: {{ output2 }}
