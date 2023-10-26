@@ -12,7 +12,7 @@ def test_selinux_custom_policy(host):
 
 
 def test_display_log(host):
-    #host.check_output('curl -L localhost:4080')
+    # host.check_output('curl -L localhost:4080')
     out = host.check_output('tail -f -n 20  /opt/omero/web/OMERO.web'
                             '/var/log/OMEROweb.log')
     assert 'djangodddddddddd' in out
