@@ -12,5 +12,6 @@ def test_selinux_custom_policy(host):
 
 
 def test_display_log(host):
-    out = host.check_output('cat /opt/omero/web/OMERO.web/var/log/OMEROweb.log')
+    out = host.check_output('cat   /opt/omero/web/OMERO.web'
+                            '/var/log/OMEROweb.log')
     assert 'django' in out
