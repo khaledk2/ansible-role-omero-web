@@ -11,8 +11,6 @@
   notify:
     - reload systemd
     - omero-web restart omero-web
-    - omero-web Display log contents
-    - omero-web Print to console
 
 # Flush handlers to ensure systemd is reloaded
 - name: omero web | flush systemd handlers
