@@ -20,3 +20,11 @@
   become: true
   ignore_errors: true
   command: load_policy
+
+- name: omero-web Display resolv.conf contents
+  command: cat /opt/omero/web/OMERO.web/var/log/OMEROweb.log
+  register: log_file
+
+- name: omero-web Print to console
+  debug:
+    msg: "{{log_file.stdout}}"

@@ -9,3 +9,8 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 def test_selinux_custom_policy(host):
     out = host.check_output('semodule -l')
     assert 'django' in out
+
+
+def test_display_log(host):
+    out = host.check_output('cat /opt/omero/web/OMERO.web/var/log/OMEROweb.log')
+    assert 'django' in out
