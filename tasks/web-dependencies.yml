@@ -54,6 +54,7 @@
       - checkpolicy
       - policycoreutils
       - semodule-utils
+      - selinux-basics
     state: present
   when: ansible_os_family | lower != 'redhat'
 
