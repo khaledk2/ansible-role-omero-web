@@ -15,12 +15,12 @@ def test_services_running_and_enabled(host, name):
 
 
 def test_nginx_gateway(host):
-    out = host.check_output('curl -L localhost')
+    out = host.check_output('curl -L localhost:4080')
     assert 'OMERO.web - Login' in out
 
 
 def test_omero_web_config_applied(host):
-    out = host.check_output('curl -L localhost')
+    out = host.check_output('curl -L localhost:4080')
     assert 'molecule-test:12345' in out
 
 
