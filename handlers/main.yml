@@ -20,13 +20,4 @@
   become: true
   ignore_errors: true
   command: load_policy
-
-- name: omero-web Display log contents
-  command: cat /opt/omero/web/OMERO.web/var/log/OMEROweb.log
-  ignore_errors: true
-  register: log_file
-
-- name: omero-web Print to console
-  ignore_errors: true
-  debug:
-    msg: "{{log_file.stdout}}"
+  when: selinux_enabled

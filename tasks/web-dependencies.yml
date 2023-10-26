@@ -82,7 +82,7 @@
   become: true
   command: "semodule -i /tmp/django.pp"
   notify:
-    - Reload SELinux
+    - omero-web Reload SELinux
   when: mod_file_name.stat.exists
 
 - name: omero web | delete mod file
