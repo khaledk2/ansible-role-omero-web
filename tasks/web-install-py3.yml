@@ -130,8 +130,6 @@
   notify:
     - omero-web rewrite omero-web configuration
     - omero-web restart omero-web
-    - omero-web Display resolv.conf contents
-    - omero-web Print to console
 
 - name: omero web | selinux restorecon
   become: true
