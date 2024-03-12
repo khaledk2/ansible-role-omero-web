@@ -96,3 +96,14 @@
 - name: Check status 2
   debug:
     var: ansible_facts.selinux.status
+
+- name: omero web | selinux booleans 222
+  become: true
+  seboolean:
+    name: "{{ item }}"
+    state: true
+    persistent: true
+  with_items:
+    - httpd_read_user_content
+    - httpd_enable_homedirs
+  #when: selinux_enabled
