@@ -82,14 +82,16 @@
 
   when:  not pp_file_name.stat.exists
 
-- name: omero web | Load the policy module
-  meta: flush_handlers
+- name: omero web | Load the policy module  
   become: true
   command: "semodule -i /tmp/django.pp"
   notify:
     - omero-web Reload SELinux
   when: mod_file_name.stat.exists
 
+- name: Flush handlers
+  meta: flush_handlers
+    
 - name: omero web | delete mod file
   ansible.builtin.file:
     path: /tmp/django.mod
