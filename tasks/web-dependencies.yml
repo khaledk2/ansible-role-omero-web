@@ -83,6 +83,7 @@
   when:  not pp_file_name.stat.exists
 
 - name: omero web | Load the policy module
+  meta: flush_handlers
   become: true
   command: "semodule -i /tmp/django.pp"
   notify:
