@@ -14,7 +14,7 @@
 # Alternatively set httpd_can_network_connect=yes to allow all ports
 - name: omero web | selinux ports
   become: true
-  seport:
+  community.general.seport:
     ports: "4080"
     proto: tcp
     setype: http_port_t
