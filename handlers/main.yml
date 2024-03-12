@@ -19,4 +19,4 @@
 - name: omero-web Reload SELinux
   become: true
   command: load_policy
-  #when: selinux_enabled
+  when: selinux_enabled
