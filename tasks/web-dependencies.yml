@@ -93,3 +93,6 @@
   ansible.builtin.file:
     path: /tmp/django.mod
     state: absent
+- name: Check status 2
+  debug:
+    var: ansible_facts.selinux.status
