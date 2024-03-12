@@ -23,7 +23,7 @@
     proto: tcp
     setype: http_port_t
     state: present
- when: selinux_enabled
+  when: selinux_enabled
 
 - name : omero web  | register pp file
   stat:
