@@ -11,6 +11,10 @@
     - httpd_enable_homedirs
   when: selinux_enabled
 
+ - name: Check status
+   debug:
+     var: ansible_facts.selinux.status
+
 # Alternatively set httpd_can_network_connect=yes to allow all ports
 - name: omero web | selinux ports
   become: true
@@ -19,7 +23,7 @@
     proto: tcp
     setype: http_port_t
     state: present
-  #when: selinux_enabled
+ when: selinux_enabled
 
 - name : omero web  | register pp file
   stat:
