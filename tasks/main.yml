@@ -3,9 +3,9 @@
 -
 - include: pre_tasks.yml
 
-- include: web-dependencies.yml
-
 - include: web-install-py3.yml
+
+- include: web-dependencies.yml
 
 - include: web-systemd.yml
   when: omero_web_systemd_setup
