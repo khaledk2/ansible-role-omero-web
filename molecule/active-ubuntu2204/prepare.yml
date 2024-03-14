@@ -43,7 +43,8 @@
       ignore_errors: true
 
     - name: display sestatus
-      msg:
-      - "status before install packages: {{ status_1 }}"
-      - "status after install packages: {{ status_2 }}"
-      - "status after reboot: {{ status_3 }}"
+      ansible.builtin.debug:
+        msg:
+          - "status before install packages: {{ status_1 }}"
+          - "status after install packages: {{ status_2 }}"
+          - "status after reboot: {{ status_3 }}"
