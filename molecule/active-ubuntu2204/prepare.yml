@@ -5,6 +5,12 @@
   hosts: all
 
   tasks:
+    - name: sestatus before package
+      become: true
+      command: "sestatus"
+      register: status_1
+      ignore_errors: true
+
     - name: Install packages
       become: true
       ansible.builtin.apt:
@@ -16,4 +22,28 @@
           - python3
           - sudo
           - bash
+          - policycoreutils
+          - selinux-basics
+          - selinux-utils
         state: present
+
+    - name: sestatus after install
+      become: true
+      command: "sestatus"
+      register: status_2
+      ignore_errors: true
+
+    - name: Reboot
+      ansible.builtin.reboot:
+
+    - name: sestatus after reboot
+      become: true
+      command: "sestatus"
+      register: status_3
+      ignore_errors: true
+
+    - name: display sestatus
+      msg:
+      - "status before install packages: {{ status_1 }}"
+      - "status after install packages: {{ status_2 }}"
+      - "status after reboot: {{ status_3 }}"
