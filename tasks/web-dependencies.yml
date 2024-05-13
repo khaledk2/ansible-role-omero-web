@@ -9,6 +9,7 @@
   with_items:
     - httpd_read_user_content
     - httpd_enable_homedirs
+    - httpd_can_network_relay
   when: selinux_enabled
 
 # Alternatively set httpd_can_network_connect=yes to allow all ports
@@ -21,9 +22,9 @@
     state: present
   when: selinux_enabled
 
-- name : omero web  | register pp file
+- name: omero web  | register pp file
   stat:
-    path:  /tmp/django.pp
+    path: /tmp/django.pp
   register: pp_file_name
 
 - name: omero web | copy te file
@@ -65,18 +66,18 @@
     creates: /tmp/django.mod
   when: not pp_file_name.stat.exists
 
-- name : omero web  | register mod file
+- name: omero web  | register mod file
   stat:
-    path:  /tmp/django.mod
+    path: /tmp/django.mod
   register: mod_file_name
 
 - name: omero web | Package the policy module
   become: true
   command: "semodule_package -o /tmp/django.pp -m /tmp/django.mod"
   args:
-     creates: /tmp/mypolicy.pp
+    creates: /tmp/mypolicy.pp
 
-  when:  not pp_file_name.stat.exists
+  when: not pp_file_name.stat.exists
 
 - name: omero web | Load the policy module
   become: true
@@ -86,6 +87,7 @@
   when: mod_file_name.stat.exists
 
 - name: omero web | delete mod file
+  become: true
   ansible.builtin.file:
     path: /tmp/django.mod
     state: absent

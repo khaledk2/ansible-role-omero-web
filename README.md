@@ -2,7 +2,7 @@ OMERO Web
 =========
 
 [![Actions Status](https://github.com/ome/ansible-role-omero-web/workflows/Molecule/badge.svg)](https://github.com/ome/ansible-role-omero-web/actions)
-[![Ansible Role](https://img.shields.io/ansible/role/41131.svg)](https://galaxy.ansible.com/ome/omero_web/)
+[![Ansible Role](https://img.shields.io/badge/ansible--galaxy-omero_web-blue.svg)](https://galaxy.ansible.com/ui/standalone/roles/ome/omero_web/)
 
 Installs and configures OMERO.web and Nginx.
 Uses a conf.d style configuration directory for managing the OMERO.web configuration.
@@ -98,6 +98,19 @@ OMERO.web with a custom configuration using `omero_web_config_set`:
             omero.web.public.server_id: 1
             omero.web.public.user: public
             omero.web.public.password: secret-password
+
+OMERO.web with the redis session engine    
+   
+    hosts: localhost    
+    roles:
+    - role: ome.omero_web
+      omero_web_setup_redis_session: true
+      omero_web_config_set:
+        "omero.web.caches":
+           "default": 
+              "BACKEND": "django_redis.cache.RedisCache"
+              "LOCATION": "redis://127.0.0.1:6379/0"
+        "omero.web.session_engine": "django.contrib.sessions.backends.cache"
 
 OMERO.web with a custom configuration using a configuration file `web-custom-config.omero`:
 
