@@ -1,4 +1,5 @@
 ---
+#test
 galaxy_info:
   author: ome-devel@lists.openmicroscopy.org.uk
   description: Install and configure OMERO.web
