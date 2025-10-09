@@ -36,6 +36,7 @@ OMERO.web systemd configuration
 - `omero_web_systemd_requires`: A list of strings with additional service names to appear in systemd unit file "Requires" statements. Default empty/none.
 
 Python 3 only parameters.
+- `python_version`: Variable used in the `ansible-role-python3-virtualenv` and for the `omero_web_python_requirements_ice_package`. Use this variable for both omero-server and omero-web to upgrade/downgrade the python version in the virtualenvs the server/web are running in. Default is `"3.12"`. Supported versions are `"3.12"`, `"3.11"`.
 - `omero_web_python_addons`: List of additional Python packages to be installed into virtualenv
 
 The [omero-web-apps](https://galaxy.ansible.com/ome/omero_web_apps) role has been merged into this role for Python 3 deployments.
