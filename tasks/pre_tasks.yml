@@ -1,11 +1,11 @@
 ---
 
 - ansible.builtin.import_role:
-    name: ome.omero_common
+    name: omero_common
 
 - name: omero-web | Include ome.selinux_utils
   ansible.builtin.include_role:
-    name: ome.selinux_utils
+    name: selinux_utils
 
 - name: omero-web | Include python3_virtualenv role
   ansible.builtin.include_role:
@@ -20,4 +20,4 @@
 
 - name: omero-web | Include ome.basedeps role
   ansible.builtin.include_role:
-    name: ome.basedeps
+    name: basedeps
