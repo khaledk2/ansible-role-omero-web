@@ -1,7 +1,8 @@
 ---
 
-- ansible.builtin.import_role:
-    name: omero_common
+- name: omero-web | Include ome.omero_common
+  ansible.builtin.import_role:
+    name: ome.omero_common
 
 - name: omero-web | Include ome.selinux_utils
   ansible.builtin.import_role:
