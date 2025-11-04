@@ -4,20 +4,20 @@
     name: omero_common
 
 - name: omero-web | Include ome.selinux_utils
-  ansible.builtin.include_role:
-    name: selinux_utils
+  ansible.builtin.import_role:
+    name: ome.selinux_utils
 
 - name: omero-web | Include python3_virtualenv role
-  ansible.builtin.include_role:
+  ansible.builtin.import_role:
     name: python3_virtualenv
   vars:
     virtualenv_basedir: "{{ omero_web_basedir }}"
 
 - name: omero-web | Include nginx role
   ansible.builtin.include_role:
-    name: nginx
+    name: ome.nginx
   when: omero_web_setup_nginx
 
 - name: omero-web | Include ome.basedeps role
-  ansible.builtin.include_role:
-    name: basedeps
+  ansible.builtin.import_role:
+    name: ome.basedeps

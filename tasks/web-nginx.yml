@@ -3,7 +3,7 @@
 
 # Flush handlers to ensure configuration is reloaded
 - name: omero web | flush systemd handlers
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
 
 - block:
 
@@ -19,7 +19,7 @@
 
     - name: omero web | write nginx config
       become: true
-      copy:
+      ansible.builtin.copy:
         content: "{{ _omero_web_config_nginx.stdout }}"
         dest: /etc/nginx/conf.d/omero-web.conf
         mode: 0644
@@ -28,7 +28,7 @@
 
 - name: omero web | nginx remove system defaults
   become: true
-  replace:
+  ansible.builtin.replace:
     backup: true
     dest: /etc/nginx/nginx.conf
     regexp: '80\s*default_server\s*;'

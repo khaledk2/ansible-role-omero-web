@@ -18,5 +18,5 @@
 
 - name: omero-web Reload SELinux
   become: true
-  command: load_policy
+  ansible.builtin.command: load_policy
   when: selinux_enabled

@@ -1,26 +1,11 @@
 ---
 
-# - src: ome.omero_common
-- name: omero_common
-  src: https://github.com/pwalczysko/ansible-role-omero-common
-  version: update-framework
-# - src: ome.nginx
-- name: nginx
-  src: https://github.com/pwalczysko/ansible-role-nginx
-  version: nginx-repo
+- src: ome.omero_common
+- src: ome.nginx
 # - src: ome.python3_virtualenv
 - name: python3_virtualenv
   src: https://github.com/khaledk2/ansible-role-python3-virtualenv
   version: update_ansible_python
-# - src: ome.selinux_utils
-- name: selinux_utils
-  src: https://github.com/khaledk2/ansible-role-selinux-utils
-  version: update_ansible
-# - src: ome.redis
-- name: redis
-  src: https://github.com/khaledk2/ansible-role-redis
-  version: update_Ansible
-# - src: ome.basedeps
-- name: basedeps
-  src: https://github.com/pwalczysko/ansible-role-basedeps
-  version: update-framework
+- src: ome.selinux_utils
+- src: ome.redis
+- src: ome.basedeps

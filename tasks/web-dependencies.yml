@@ -2,7 +2,7 @@
 # selinux
 - name: omero web | selinux booleans
   become: true
-  seboolean:
+  ansible.posix.seboolean:
     name: "{{ item }}"
     state: true
     persistent: true
@@ -19,7 +19,7 @@
   # using the "native" python for the VM - otherwise the task fails
   vars:
     ansible_python_interpreter: "/usr/bin/python"
-  seport:
+  community.general.seport:
     ports: "4080"
     proto: tcp
     setype: http_port_t
