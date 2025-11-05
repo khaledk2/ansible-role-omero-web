@@ -8,6 +8,7 @@ Installs and configures OMERO.web and Nginx.
 Uses a conf.d style configuration directory for managing the OMERO.web configuration.
 
 **Warning:** Python 2 support is dropped.
+**Warning** The versions >5 require `ome.python3_virtualenv`>0.1.2.
 See [`CHANGES.md`](./CHANGES.md) for details.
 
 
