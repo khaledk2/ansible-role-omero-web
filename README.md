@@ -8,7 +8,7 @@ Installs and configures OMERO.web and Nginx.
 Uses a conf.d style configuration directory for managing the OMERO.web configuration.
 
 **Warning:** Python 2 support is dropped.
-**Warning** The versions >5 require `ome.python3_virtualenv`>0.1.2.
+**Warning** The versions >5 require `ome.python3_virtualenv`>=0.3.0.
 See [`CHANGES.md`](./CHANGES.md) for details.
 
 
@@ -37,7 +37,7 @@ OMERO.web systemd configuration
 - `omero_web_systemd_requires`: A list of strings with additional service names to appear in systemd unit file "Requires" statements. Default empty/none.
 
 Python 3 only parameters.
-- `python_version`: Variable used in the `ansible-role-python3-virtualenv` and for the `omero_web_python_requirements_ice_package`. Use this variable for both omero-server and omero-web to upgrade/downgrade the python version in the virtualenvs the server/web are running in. Default is `"3.12"`. Supported versions are `"3.12"`, `"3.11"`.
+- `python_version`: Variable used in the `ome.python3_virtualenv` and for the `omero_web_python_requirements_ice_package`. Use this variable for both omero-server and omero-web to upgrade/downgrade the python version in the virtualenvs the server/web are running in. Default is `"3.12"`. Supported versions are `"3.12"`, `"3.11"`.
 - `omero_web_python_addons`: List of additional Python packages to be installed into virtualenv
 
 The [omero-web-apps](https://galaxy.ansible.com/ome/omero_web_apps) role has been merged into this role for Python 3 deployments.

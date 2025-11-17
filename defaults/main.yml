@@ -80,7 +80,7 @@ omero_web_python_requirements:
       ternary('', '==' + omero_web_release) }}"
   - redis
 
-# Variable used in the ansible-role-python3-virtualenv and for the
+# Variable used in the ome.python3_virtualenv and for the
 # omero_web_python_requirements_ice_package. Use the same variable
 # (python_version) for both omero-server and omero-web.
 python_version: "3.12"
