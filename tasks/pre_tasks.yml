@@ -10,7 +10,7 @@
 
 - name: omero-web | Include python3_virtualenv role
   ansible.builtin.import_role:
-    name: python3_virtualenv
+    name: ome.python3_virtualenv
   vars:
     virtualenv_basedir: "{{ omero_web_basedir }}"
 
