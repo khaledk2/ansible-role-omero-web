@@ -14,7 +14,7 @@
 
 # Flush handlers to ensure systemd is reloaded
 - name: omero web | flush systemd handlers
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
 
 - name: omero web | enable and start web systemd
   become: true

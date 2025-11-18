@@ -2,7 +2,7 @@
 # selinux
 - name: omero web | selinux booleans
   become: true
-  seboolean:
+  ansible.posix.seboolean:
     name: "{{ item }}"
     state: true
     persistent: true
@@ -15,7 +15,11 @@
 # Alternatively set httpd_can_network_connect=yes to allow all ports
 - name: omero web | selinux ports
   become: true
-  seport:
+  # Need to install VM-wide packages (e.g. libselinux-python3)
+  # using the "native" python for the VM - otherwise the task fails
+  vars:
+    ansible_python_interpreter: "/usr/bin/python"
+  community.general.seport:
     ports: "4080"
     proto: tcp
     setype: http_port_t
@@ -38,7 +42,6 @@
 - name: omero web | install checkpolicy
   become: true
   ansible.builtin.dnf:
-    update_cache: true
     name:
       - checkpolicy
       - policycoreutils
@@ -51,6 +54,7 @@
   become: true
   ansible.builtin.apt:
     update_cache: true
+    cache_valid_time: 86400
     name:
       - checkpolicy
       - policycoreutils
