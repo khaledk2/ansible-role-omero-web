@@ -7,16 +7,16 @@
 - name: omero-web rewrite omero-web configuration
   become: true
   become_user: "{{ omero_web_system_user }}"
-  command: "{{ omero_web_config_update }}"
+  ansible.builtin.command: "{{ omero_web_config_update }}"
 
 - name: omero-web restart omero-web
   become: true
-  service:
+  ansible.builtin.service:
     name: omero-web
     state: restarted
   when: omero_web_systemd_setup and omero_web_systemd_start
 
 - name: omero-web Reload SELinux
   become: true
-  command: load_policy
+  ansible.builtin.command: load_policy
   when: selinux_enabled

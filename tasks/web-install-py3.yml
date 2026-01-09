@@ -7,33 +7,33 @@
 # https://stackoverflow.com/questions/54025894/how-to-sort-version-numbers-in-ansible
 
 - name: omero web | display omero_common_basedir value
-  debug:
+  ansible.builtin.debug:
     msg: "default: {{ omero_common_basedir }}"
 
 - name: omero web | is web symlink present
   become: true
-  stat:
+  ansible.builtin.stat:
     path: "{{ omero_web_omerodir }}"
   register: omero_web_symlink_st
 
 # Symlink ⇒ Old Python 2 installation: stop OMERO before doing anything else
 - name: omero web | stop omero web
   become: true
-  service:
+  ansible.builtin.service:
     name: omero-web
     state: stopped
   when: omero_web_symlink_st.stat.exists and omero_web_symlink_st.stat.islnk
 
 - name: omero web | remove symlink
   become: true
-  file:
+  ansible.builtin.file:
     path: "{{ omero_web_omerodir }}"
     state: absent
   when: omero_web_symlink_st.stat.exists and omero_web_symlink_st.stat.islnk
 
 - name: omero web | create OMERODIR readonly
   become: true
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     mode: 0755
@@ -47,7 +47,7 @@
 # TODO: Check is home directory location be modified for an upgrade?
 - name: omero web | create system user
   become: true
-  user:
+  ansible.builtin.user:
     name: "{{ omero_web_system_user }}"
     home: "{{ omero_web_omerodir }}/var"
     createhome: false
@@ -57,7 +57,7 @@
 
 - name: omero web | create OMERODIR writeable
   become: true
-  file:
+  ansible.builtin.file:
     path: "{{ omero_web_omerodir }}{{ item }}"
     state: directory
     owner: "{{ omero_web_system_user }}"
@@ -68,13 +68,13 @@
 
 - name: omero web | remove old configuration script
   become: true
-  file:
+  ansible.builtin.file:
     path: "{{ omero_web_basedir }}/config/omero-web-config-update.sh"
     state: absent
 
 - name: omero web | configuration 00-omero-web.omero
   become: true
-  template:
+  ansible.builtin.template:
     dest: "{{ omero_web_basedir }}/config/00-omero-web.omero"
     force: true
     src: 00-omero-web-omero.j2
@@ -85,7 +85,7 @@
 
 - name: omero web | add application web configuration
   become: true
-  template:
+  ansible.builtin.template:
     dest: "{{ omero_web_basedir }}/config/\
       {{ omero_web_apps_config_name }}.omero"
     force: true
@@ -97,7 +97,7 @@
 
 - name: omero web | setup virtualenv3
   become: true
-  pip:
+  ansible.builtin.pip:
     name: "pip>=21"
     state: present
     virtualenv: "{{ omero_web_virtualenv_basedir }}"
@@ -105,7 +105,7 @@
 
 - name: omero web | install tzdata
   become: true
-  pip:
+  ansible.builtin.pip:
     name: tzdata
     state: present
     virtualenv: "{{ omero_web_virtualenv_basedir }}"
@@ -116,7 +116,7 @@
 
 - name: omero web | install django_redis
   become: true
-  pip:
+  ansible.builtin.pip:
     name: django_redis
     state: present
     virtualenv: "{{ omero_web_virtualenv_basedir }}"
@@ -132,7 +132,7 @@
 # error it will be updated before a restart
 - name: omero web | install requirements
   become: true
-  pip:
+  ansible.builtin.pip:
     name: >-
       {{
         omero_web_python_requirements +
@@ -149,7 +149,7 @@
 # Remembering to set OMERODIR everywhere is prone to error
 - name: omero web | create omero web wrapper
   become: true
-  template:
+  ansible.builtin.template:
     dest: "{{ omero_web_omero_command }}"
     src: bin-omero.j2
     mode: 0555
@@ -159,7 +159,7 @@
 
 - name: omero web | selinux restorecon
   become: true
-  command: >-
+  ansible.builtin.command: >-
     /usr/sbin/restorecon -R -v
     {{ ansible_check_mode | ternary('-n', '') }}
     {{ omero_web_basedir }}/OMERO.web
