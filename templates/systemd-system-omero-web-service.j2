@@ -20,6 +20,9 @@ ExecStop={{ omero_web_omero_command }} web stop
 {% if omero_web_systemd_limit_nofile %}
 LimitNOFILE={{ omero_web_systemd_limit_nofile }}
 {% endif %}
+{% for name in (omero_additional_web_systemd_vars | sort) %}
+{{ name }}={{ omero_additional_web_systemd_vars[name] | quote }}
+{% endfor %}
 
 [Install]
 WantedBy=multi-user.target

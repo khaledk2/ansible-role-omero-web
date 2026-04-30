@@ -113,6 +113,9 @@ omero_web_always_reset_config: true
 # DEVELOPMENT: Automatically start systemd omero-web
 omero_web_systemd_start: true
 
+# Dictionary of additional service variables
+omero_additional_web_systemd_vars: {}
+
 # Base directory for the web installation
 omero_web_basedir: "{{ omero_common_basedir }}/web"
 
