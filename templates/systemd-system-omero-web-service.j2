@@ -20,8 +20,8 @@ ExecStop={{ omero_web_omero_command }} web stop
 {% if omero_web_systemd_limit_nofile %}
 LimitNOFILE={{ omero_web_systemd_limit_nofile }}
 {% endif %}
-{% for name in (omero_web_systemd_service | sort) %}
-{{ name }}={{ omero_web_systemd_service[name] | quote }}
+{% for name in (omero_web_systemd_service_vars | sort) %}
+{{ name }}={{ omero_web_systemd_service_vars[name] | quote }}
 {% endfor %}
 
 [Install]

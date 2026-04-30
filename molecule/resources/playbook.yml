@@ -50,7 +50,7 @@
         omero.web.server_list:
           - [localhost, 12345, molecule-test]
 
-      omero_web_systemd_service:
+      omero_web_systemd_service_vars:
         Restart: on-failure
         StartLimitIntervalSec: 600
         StartLimitBurst: 5
