@@ -91,3 +91,9 @@
         example.string: example value
         example.boolean: true
         example.integer: 2
+
+      omero_additional_web_systemd_vars:
+        Restart: on-failure
+        StartLimitIntervalSec: 600
+        StartLimitBurst: 5
+
