@@ -38,3 +38,10 @@ def test_omero_version(host):
     assert m is not None
     assert int(m.group(1)) >= 5
     assert int(m.group(2)) > 3
+
+# test for omero_additional_web_systemd_vars new var
+def test_omero_web_service_config(host):
+    serv_cfg = host.check_output("cat /etc/systemd/system/omero-web.service")
+    assert 'StartLimitIntervalSec=600' in serv_cfg
+    assert 'StartLimitBurst=5' in serv_cfg
+    assert 'Restart=on-failure' in serv_cfg
