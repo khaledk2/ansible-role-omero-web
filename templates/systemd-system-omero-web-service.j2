@@ -7,7 +7,6 @@ After=network.service
 {% endfor %}
 {% for value in omero_web_systemd_requires %}Requires={{ value }}
 {% endfor %}
-{% endif %}
 {% for name in (omero_additional_web_systemd_unit_vars | sort) %}
 {{ name }}={{ omero_additional_web_systemd_unit_vars[name] | quote }}
 {% endfor %}
