@@ -93,6 +93,6 @@
         example.integer: 2
       omero_additional_web_systemd_service_vars:
         Restart: on-failure
-      omero_additional_web_systemd_unit_vars:
         StartLimitIntervalSec: 600
+      omero_additional_web_systemd_unit_vars:
         StartLimitBurst: 5
